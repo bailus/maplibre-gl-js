@@ -344,7 +344,7 @@ export class Viewport extends BaseValue<ViewportType> {
         const gl = this.gl;
         return [0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight];
     }
-    set(v: ViewportType) {
+    set(v: ViewportType, p0?: boolean) {
         const c = this.current;
         if (v[0] === c[0] && v[1] === c[1] && v[2] === c[2] && v[3] === c[3] && !this.dirty) return;
         this.gl.viewport(v[0], v[1], v[2], v[3]);
