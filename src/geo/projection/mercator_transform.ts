@@ -12,12 +12,14 @@ import {EXTENT} from '../../data/extent';
 import {TransformHelper} from '../transform_helper';
 import {MercatorCoveringTilesDetailsProvider} from './mercator_covering_tiles_details_provider';
 import {Frustum} from '../../util/primitives/frustum';
+import {coveringTiles} from './covering_tiles';
 
 import type {Terrain} from '../../render/terrain';
 import type {IReadonlyTransform, ITransform} from '../transform_interface';
 import type {PaddingOptions} from '../edge_insets';
 import type {ProjectionData, ProjectionDataParams} from './projection_data';
 import type {CoveringTilesDetailsProvider} from './covering_tiles_details_provider';
+import type {CoveringTilesOptions} from './covering_tiles';
 
 export class MercatorTransform implements ITransform {
     private _helper: TransformHelper;
@@ -212,6 +214,9 @@ export class MercatorTransform implements ITransform {
     }
     setTransitionState(_value: number, _error: number): void {
         // Do nothing
+    }
+    coveringTiles(options: CoveringTilesOptions): OverscaledTileID[] {
+        return coveringTiles(this, options);
     }
     //
     // Implementation of mercator transform

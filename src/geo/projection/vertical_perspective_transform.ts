@@ -10,6 +10,7 @@ import {tileCoordinatesToMercatorCoordinates} from './mercator_utils';
 import {angularCoordinatesToSurfaceVector, clampToSphere, getGlobeRadiusPixels, getZoomAdjustment, horizonPlaneToCenterAndRadius, mercatorCoordinatesToAngularCoordinatesRadians, projectTileCoordinatesToSphere, sphereSurfacePointToCoordinates} from './globe_utils';
 import {GlobeCoveringTilesDetailsProvider} from './globe_covering_tiles_details_provider';
 import {Frustum} from '../../util/primitives/frustum';
+import {coveringTiles} from './covering_tiles';
 
 import type {Terrain} from '../../render/terrain';
 import type {PointProjection} from '../../symbol/projection';
@@ -17,6 +18,7 @@ import type {IReadonlyTransform, ITransform} from '../transform_interface';
 import type {PaddingOptions} from '../edge_insets';
 import type {ProjectionData, ProjectionDataParams} from './projection_data';
 import type {CoveringTilesDetailsProvider} from './covering_tiles_details_provider';
+import type {CoveringTilesOptions} from './covering_tiles';
 
 /**
  * Describes the intersection of ray and sphere.
@@ -229,6 +231,9 @@ export class VerticalPerspectiveTransform implements ITransform {
     }
     setTransitionState(_value: number): void {
         // Do nothing
+    }
+    coveringTiles(options: CoveringTilesOptions): OverscaledTileID[] {
+        return coveringTiles(this, options);
     }
     //
     // Implementation of globe transform

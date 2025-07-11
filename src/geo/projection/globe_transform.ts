@@ -5,6 +5,7 @@ import {VerticalPerspectiveTransform} from './vertical_perspective_transform';
 import {type LngLat, type LngLatLike,} from '../lng_lat';
 import {lerp} from '../../util/util';
 import type {OverscaledTileID, UnwrappedTileID, CanonicalTileID} from '../../source/tile_id';
+import {coveringTiles} from './covering_tiles';
 
 import type Point from '@mapbox/point-geometry';
 import type {MercatorCoordinate} from '../mercator_coordinate';
@@ -16,6 +17,7 @@ import type {IReadonlyTransform, ITransform} from '../transform_interface';
 import type {PaddingOptions} from '../edge_insets';
 import type {ProjectionData, ProjectionDataParams} from './projection_data';
 import type {CoveringTilesDetailsProvider} from './covering_tiles_details_provider';
+import type {CoveringTilesOptions} from './covering_tiles';
 
 /**
  * Globe transform is a transform that moves between vertical perspective and mercator projections.
@@ -210,6 +212,9 @@ export class GlobeTransform implements ITransform {
     }
     public get autoCalculateNearFarZ(): boolean { 
         return this._helper.autoCalculateNearFarZ; 
+    }
+    coveringTiles(options: CoveringTilesOptions): OverscaledTileID[] {
+        return coveringTiles(this, options);
     }
     //
     // Implementation of globe transform
